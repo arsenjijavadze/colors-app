@@ -10,3 +10,8 @@
 - HTML
 - CSS
 - JavaScript
+<hr/>
+
+
+Use space button for generate colors.
+You can fixate the color by the lock button.
