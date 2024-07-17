@@ -1,17 +1,33 @@
-## This is very simple color palatte generator
+# Colors App
 
-<img src="./preview.gif" width="400" />
+## Overview
+Colors App is a simple application for managing color palettes. This project includes a basic Flask backend.
 
-#### Links 
-- Live Site URL: [Live](https://arsenjijavadze.github.io/js-colors/)
-- Frontend URL: [GitHub Code](https://github.com/arsenjijavadze/js-colors)
+## Setup
 
-#### Built with
-- HTML
-- CSS
-- JavaScript
-<hr/>
+### Prerequisites
+- Python 3.6 or higher
+- Virtual Environment
 
+### Installation
+1. Clone the repository:
+    ```sh
+    git clone git@github.com:arsenjijavadze/colors-app.git
+    cd colors-app
+    ```
 
-Use space button for generate colors.
-You can fixate the color by the lock button.
+2. Create and activate a virtual environment:
+    ```sh
+    python -m venv venv
+    source venv/bin/activate
+    ```
+
+3. Install the required packages:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+### Running the Server
+To start the Flask server, run:
+```sh
+python app.py
