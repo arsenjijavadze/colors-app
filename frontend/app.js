@@ -1,3 +1,6 @@
+document.addEventListener('DOMContentLoaded', () => {
+  fetchPalettes();
+})
 const cols = document.querySelectorAll('.col')
 
 document.addEventListener('keydown', event => {
@@ -5,7 +8,7 @@ document.addEventListener('keydown', event => {
     if (event.code.toLowerCase() === 'space') {
         setRandomColors()
     }
-})
+});
 
 document.addEventListener('click', event => {
     const type = event.target.dataset.type
@@ -90,6 +93,32 @@ function getColorsFromHash() {
             .map((color) => '#' + color)
     }
     return []
+}
+
+function fetchPalettes() {
+  fetch('https://localhost:5000/palettes')
+    .then(response => response.json())
+    .then(data => {
+      console.log('Palettes:', data);
+      //! update UI with the received palettes
+    })
+    .catch(error => console.error('Error fetching palettes:', error));
+}
+
+function addPelette(palette) {
+  fetch('https://localhost:5000/palettes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    }, 
+    body: JSON.springify({ palette }),
+  })
+  .then(response => response.json())
+  .then(data => {
+      console.log('Success:', data);
+      fetchPalettes(); // Refresh the list of palettes after adding a new one
+    })
+    .catch(error => console.error('Error adding palette:', error));
 }
 
 setRandomColors(true);

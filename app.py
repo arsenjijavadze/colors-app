@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Temporary storage for palette
 palettes = []
@@ -9,15 +11,17 @@ palettes = []
 def home():
     return "Welcome to the Colors App API!"
 
-@app.route('/palettes', methods=['GET'])
-def get_palettes():
-    return jsonify(palettes), 200
-
-@app.route('/palettes', methods=['POST'])
-def add_palette():
-    palette = request.json
-    palettes.append(palette)
-    return jsonify(palette), 201
+@app.route('/palettes', methods=['GET', 'POST'])
+def manage_palettes():
+    if request.method == 'POST':
+        palette = request.json.get('palette')
+        if palette:
+            palettes.append(palette)
+            return jsonify({"message": "Palette added successfully!"}), 201 
+        return jsonify({"message": "No palette provided"}), 400
+    elif request.method == 'GET':
+        return jsonify(palettes)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    context = ('localhost.pem', 'localhost-key.pem')
+    app.run(debug=True, ssl_context=context)
